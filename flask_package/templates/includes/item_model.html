@@ -1,0 +1,88 @@
+<style>
+  .modal-content{
+    background-color: #212121
+}
+</style>
+
+<div class="modal fade" id="Modal-MoreInfo-{{ dict.id }}"
+     tabindex="-1"
+     aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="ModalLabel">
+          <!-- -->
+          {{ dict.Product_Name }}
+        </h5>
+        <button type="button" class="close"
+                data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        {{ dict.Description }}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary"
+                data-dismiss="modal">Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<div class="modal fade" id="Modal-BuyItem-{{ dict.id }}"
+tabindex="-1"
+aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal-dialog">
+<div class="modal-content">
+ <div class="modal-header">
+   <h5 class="modal-title" id="ModalLabel">
+     <!-- -->
+     {{ dict.Product_Name }}
+   </h5>
+   <button type="button" class="close"
+           data-dismiss="modal" aria-label="Close">
+     <span aria-hidden="true">&times;</span>
+   </button>
+ </div>
+ <div class="modal-body">
+   <form method="POST">
+     {{ purchaseForm.hidden_tag() }}
+     {% if dict.Quantity == 0 %}
+        Selected Item is out of stock
+     {% else %}
+        {% if dict.Price <= current_user.Budget %}
+            Confirm purchase of above item for {{ dict.Price }}$
+            <br>
+            <br>
+            <input id="itemPurchased" name="itemPurchased" type="hidden" value="{{ dict.Product_Name }}">
+            {{ purchaseForm.submit(class="btn btn-outline-success btn-block")}}
+        {% else %}
+            Insufficient funds
+            <input id="itemPurchased" name="itemPurchased" type="hidden" value="{{ dict.Product_Name }}">
+            {{ purchaseForm.submit(class="btn btn-disabled")}}
+        {% endif %}
+
+     {% endif %}
+     <!-- <button type="button" class="btn btn-outline btn-success" data-dismiss="modal">Confirm</button> -->
+   </form>
+ </div>
+ <div class="modal-footer">
+   <!-- <button type="button" class="btn btn-outline btn-success" data-dismiss="modal">Confirm</button> -->
+   <button type="button" class="btn btn-secondary"
+           data-dismiss="modal">Close
+   </button>
+ </div>
+</div>
+</div>
+</div>
+
+
+
+    
+
+

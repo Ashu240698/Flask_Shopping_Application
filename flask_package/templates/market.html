@@ -1,0 +1,70 @@
+{% extends 'base_layout.html' %}
+
+{% block title %}
+Market Page
+{% endblock %}
+
+{% block content %}
+
+    <div class="row">
+        <div class="col-8">
+                <table class="table table-hover table-dark" style="margin-top: 20px; margin-left: 20px;">
+                    <h2 style="margin-top: 20px; margin-left: 20px;">Available Products</h2>
+                    <p style="margin-top: 20px; margin-left: 20px;">Click on product name for product description</p>
+                        <thead>
+                            <tr>
+                                <th scope="col">ID</th>
+                                <th scope="col">Product Name</th>
+                                <th scope="col">Qantity</th>
+                                <th scope="col">Price</th>
+                                <th scope="col">Options</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for dict in items %}
+                            {% include 'includes/item_model.html' %}
+                            <tr>
+                                <td>{{ dict.id }}</td>
+                                <td><a style="color: orange;"  data-toggle="modal", data-target="#Modal-MoreInfo-{{ dict.id }}">{{ dict.Product_Name }} </a> </td>
+                                <td>{{ dict.Quantity }}</td>
+                                <td>{{ dict.Price }}</td>
+                                <td>
+                                    <!-- <button class="btn btn-outline btn-info">More Info</button> -->
+                                    <button class="btn btn-outline btn-success" data-toggle="modal", data-target="#Modal-BuyItem-{{ dict.id }}">Buy This</button>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+        </div>
+
+
+        <div class="col-4">
+            <h2>Owned Items</h2>
+            <p>Click on sell item to put an item back on the Market</p>
+            <br>
+            <div class="row">
+               {% if current_user.is_authenticated %}
+                 {% for item in returnItems %}
+                    {% include 'includes/return_items_modal.html' %}
+                    <div class="col-md-6">
+                        <div style="margin-bottom: 5px" class="card text-center bg-dark">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ item.Product_Name}}</h5>
+                                <button type="button" class="btn btn-outline-danger" style="margin-bottom: 5px"
+                                        data-toggle="modal" data-target="#Modal-SellingConfirm-{{ item.id }}">
+                                    Sell this Item
+                                </button>
+                                <p class="card-text"><strong>
+                                    This item costs {{ item.Price }}$
+                                </strong></p>
+                            </div>
+                        </div>
+                    </div>
+                 {% endfor %}
+                {% endif %}
+            </div>
+       </div>
+    </div>
+    </div>
+{% endblock %}

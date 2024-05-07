@@ -1,0 +1,65 @@
+{% extends 'base_layout.html' %}
+
+{% block title %}
+  Register Page
+{% endblock %}
+
+{%  block login %}
+    <ul class="navbar-nav">
+        <a class="nav-link active" href="{{ url_for('displayLoginPage') }}" style="color: orange; font-size: larger;">
+          Login
+          <!-- <svg class="bi" aria-hidden="true"><use xlink:href="#arrow-right"></use></svg> -->
+        </a>
+        <!-- <li class="nav-item">
+          <a style="color: orange; font-size: larger;" class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="{{ url_for('displayLoginPage') }}">Login</a>
+       </li> -->
+    </ul>
+{% endblock %}
+
+{% block content %}
+  <body>
+    <div class="container">
+        <form method="post" class="form-register" style="color: white;">
+          {{ form.hidden_tag() }}
+            <br>
+            <br>
+            
+            <h1 class="h3 mb-3 font-weight-normal">
+                Please create your account
+            </h1>
+            <br>
+
+            {{ form.username.label() }}
+            {{ form.username(class="form-control", placeholder="Enter username")}}
+
+            {{ form.email_address.label() }}
+            {{ form.email_address(class="form-control", placeholder="Enter email address")}}
+
+            {{ form.password.label() }}
+            {{ form.password(class="form-control", placeholder="Enter password")}}
+
+            {{ form.confirm_password.label() }}
+            {{ form.confirm_password(class="form-control", placeholder="Confirm Password")}}
+
+            <br>
+
+            {{ form.submit(class="btn btn-lg btn-block btn-primary")}}
+
+            <br>
+            <br>
+
+            <!-- <div class="text-center">
+              <div class="checkbox mb-3">
+                <a href="{{ url_for('displayLoginPage') }}" class="btn btn-sm btn-secondary">Sign in</a><br>
+                <h5>Already a user</h5>
+              </div>
+            </div> -->
+
+         
+
+        </form>
+    </div>
+  </body>
+
+
+{% endblock %}
