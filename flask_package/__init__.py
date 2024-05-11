@@ -7,7 +7,7 @@ from flask_login import LoginManager
 app = Flask(__name__)
 print(app)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///market.db'
-app.config['SECRET_KEY'] = '4cac6ecba0dbb40efe5730ce' #Without this line --> RuntimeError: A secret key is required to use CSRF.
+app.config['SECRET_KEY'] = 'SECRET_KEY' #Without this line --> RuntimeError: A secret key is required to use CSRF.
 db = SQLAlchemy(app)
 bcrypt = Bcrypt(app)
 login_manager = LoginManager(app)
